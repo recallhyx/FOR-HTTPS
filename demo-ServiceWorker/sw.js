@@ -27,7 +27,6 @@ self.addEventListener('fetch', function (event) {
         console.log(response);
         return response;
       }
-      console.log('next');
       // 如果 service worker 没有返回，那就得直接请求真实远程服务
       const request = event.request.clone(); // 把原始请求拷过来
       return fetch(request).then(function (httpRes) {
@@ -54,16 +53,18 @@ self.addEventListener('fetch', function (event) {
     })
   );
 });
-// self.addEventListener('fetch', function(event) {
-//   event.respondWith(
-//     caches.match(event.request)
-//       .then(function(response) {
-//           // Cache hit - return response
-//           if (response) {
-//             return response;
-//           }
-//           return fetch(event.request);
-//         }
-//       )
-//   );
-// });
+// 缓存更新
+self.addEventListener('activate', function(event) {
+  event.waitUntil(
+    caches.keys().then(function(cacheNames) {
+      return Promise.all(
+        cacheNames.map(function(cacheName) {
+          // 如果当前版本和缓存版本不一致
+          if (cacheName !== CACHE_NAME) {
+            return caches.delete(cacheName);
+          }
+        })
+      );
+    })
+  );
+});
