@@ -84,7 +84,7 @@ if (workbox) {
     console.log(`Yay! workbox is loaded 🎉`);
     workbox.routing.registerRoute(
       '/', // 匹配的路由
-      workbox.strategies.staleWhileRevalidate()
+      workbox.strategies.networkFirst()
   );
 }
 else {
