@@ -81,17 +81,17 @@
 importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/3.0.0-alpha.3/workbox-sw.js"
 );
-
-if (workbox) {
+const workboxSW = new self.WorkboxSW({skipWaiting: true, clientsClaim: true});
+if (workboxSW) {
   console.log(`Yay! workbox is loaded 🎉`);
   // workbox.precaching.precacheAndRoute([
   //   { url: "/index.html", revision: "383676" }
   // ]);
-  workbox.setConfig({ debug: true });
-  workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
-  workbox.routing.registerRoute(
+  workboxSW.setConfig({ debug: true });
+  workboxSW.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
+  workboxSW.routing.registerRoute(
     new RegExp('.*\.html'), // 匹配的路由
-    workbox.strategies.networkFirst()
+    workboxSW.strategies.networkFirst()
   );
 } else {
   console.log(`Boo! workbox didn't load 😬`);
