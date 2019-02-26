@@ -91,7 +91,7 @@ if (workbox) {
   workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
   workbox.routing.registerRoute(
     new RegExp('.*\.html'), // 匹配的路由
-    workbox.strategies.cacheFirst()
+    workbox.strategies.staleWhileRevalidate()
   );
 } else {
   console.log(`Boo! workbox didn't load 😬`);
