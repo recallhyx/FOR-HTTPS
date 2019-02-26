@@ -1,4 +1,4 @@
-const CACHE_NAME = 'my-site-cache-v3';
+const CACHE_NAME = 'my-site-cache-v4';
 const urlsToCache = [
   './',
   './index.html',
@@ -8,7 +8,7 @@ const urlsToCache = [
 
 self.addEventListener('install', function(event) {
   // Perform install steps
-  event.waitUntil(self.skipWaiting());
+  self.skipWaiting();
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(function(cache) {
