@@ -81,7 +81,7 @@
 importScripts(
   "https://storage.googleapis.com/workbox-cdn/releases/3.0.0-alpha.3/workbox-sw.js"
 );
-const workboxSW = new self.WorkboxSW({skipWaiting: true, clientsClaim: true});
+
 if (workbox) {
   console.log(`Yay! workbox is loaded 🎉`);
   // workbox.precaching.precacheAndRoute([
