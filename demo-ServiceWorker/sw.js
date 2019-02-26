@@ -61,7 +61,7 @@ self.addEventListener('activate', function(event) {
       return Promise.all([
 
         // 更新客户端
-        self.clients.claim(),
+        // self.clients.claim(),
 
         // 清理旧版本
         caches.keys().then(function (cacheList) {
