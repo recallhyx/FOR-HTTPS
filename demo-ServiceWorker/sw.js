@@ -87,6 +87,7 @@ if (workbox) {
   // workbox.precaching.precacheAndRoute([
   //   { url: "/index.html", revision: "383676" }
   // ]);
+  workbox.setConfig({ debug: true });
   workbox.routing.registerRoute(
     "/index.html", // 匹配的路由
     workbox.strategies.networkFirst()
