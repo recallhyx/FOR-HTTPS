@@ -1,4 +1,4 @@
-const CACHE_NAME = 'my-site-cache-v1';
+const CACHE_NAME = 'my-site-cache-v3';
 const urlsToCache = [
   './',
   './index.html',
@@ -8,6 +8,7 @@ const urlsToCache = [
 
 self.addEventListener('install', function(event) {
   // Perform install steps
+  event.waitUntil(self.skipWaiting());
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(function(cache) {
@@ -57,14 +58,22 @@ self.addEventListener('fetch', function (event) {
 self.addEventListener('activate', function(event) {
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
-      return Promise.all(
-        cacheNames.map(function(cacheName) {
-          // 如果当前版本和缓存版本不一致
-          if (cacheName !== CACHE_NAME) {
-            return caches.delete(cacheName);
-          }
+      return Promise.all([
+
+        // 更新客户端
+        self.clients.claim(),
+
+        // 清理旧版本
+        caches.keys().then(function (cacheList) {
+          return Promise.all(
+            cacheList.map(function (cacheName) {
+              if (cacheName !== 'my-test-cache-v1') {
+                return caches.delete(cacheName);
+              }
+            })
+          );
         })
-      );
+      ])
     })
   );
 });
