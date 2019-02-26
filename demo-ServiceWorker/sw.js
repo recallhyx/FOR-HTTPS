@@ -82,10 +82,13 @@ importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.0.0-alpha.3
 
 if (workbox) {
     console.log(`Yay! workbox is loaded 🎉`);
-    workbox.routing.registerRoute(
-      new RegExp('.*\.html'), // 匹配的路由
-      workbox.strategies.networkFirst()
-  );
+    workbox.precaching.precacheAndRoute([
+      { url: '/index.html', revision: '383676' },
+  ]);
+  //   workbox.routing.registerRoute(
+  //     new RegExp('.*\.html'), // 匹配的路由
+  //     workbox.strategies.networkFirst()
+  // );
 }
 else {
     console.log(`Boo! workbox didn't load 😬`);
