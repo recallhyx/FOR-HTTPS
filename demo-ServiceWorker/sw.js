@@ -88,6 +88,7 @@ if (workbox) {
   //   { url: "/index.html", revision: "383676" }
   // ]);
   workbox.setConfig({ debug: true });
+  workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
   workbox.routing.registerRoute(
     "/index.html", // 匹配的路由
     workbox.strategies.networkFirst()
