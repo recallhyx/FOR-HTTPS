@@ -1,4 +1,4 @@
-const CACHE_NAME = 'my-site-cache-v10';
+const CACHE_NAME = 'my-site-cache-v11';
 const urlsToCache = [
   './',
   './index.html',
@@ -12,7 +12,7 @@ self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(function(cache) {
-        console.log('Opened cache');
+        console.log('enter install, Opened cache');
         return cache.addAll(urlsToCache);
       })
   );
@@ -25,7 +25,7 @@ self.addEventListener('fetch', function (event) {
 
       // 如果 Service Worker 有自己的返回，就直接返回，减少一次 http 请求
       if (response) {
-        console.log(response);
+        console.log('enter fetch', response);
         return response;
       }
       // 如果 service worker 没有返回，那就得直接请求真实远程服务
@@ -58,10 +58,11 @@ self.addEventListener('fetch', function (event) {
 self.addEventListener('activate', function(event) {
   event.waitUntil(
     caches.keys().then(function(cacheNames) {
+      console.log('enter activate');
       return Promise.all([
 
         // 更新客户端
-        // self.clients.claim(),
+        self.clients.claim(),
 
         // 清理旧版本
         caches.keys().then(function (cacheList) {
