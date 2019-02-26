@@ -91,7 +91,7 @@ if (workbox) {
   workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
   workbox.routing.registerRoute(
     "/index.html", // 匹配的路由
-    workbox.strategies.networkFirst()
+    workbox.strategies.cacheFirst()
   );
 } else {
   console.log(`Boo! workbox didn't load 😬`);
