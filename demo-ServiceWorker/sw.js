@@ -90,7 +90,7 @@ if (workbox) {
   workbox.setConfig({ debug: true });
   workbox.core.setLogLevel(workbox.core.LOG_LEVELS.debug);
   workbox.routing.registerRoute(
-    "/index.html", // 匹配的路由
+    new RegExp('.*\.html'), // 匹配的路由
     workbox.strategies.cacheFirst()
   );
 } else {
