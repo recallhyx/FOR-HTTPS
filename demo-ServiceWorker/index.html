@@ -4,7 +4,7 @@
     <link rel="stylesheet" type="text/css" href="./styles/main.css"></style>
   </head>
   <body>
-    <div class='blue'>
+    <div class='red'>
       hello Service Worker !
     </div>
     <div class='yellow'>
@@ -16,7 +16,7 @@
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', function () {
-          navigator.serviceWorker.register('./sw.js', {scope: './'})
+          navigator.serviceWorker.register('/sw.js')
             .then(function (registration) {
               registration.update();
               // 注册成功
